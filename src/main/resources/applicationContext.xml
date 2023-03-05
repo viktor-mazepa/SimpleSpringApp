@@ -34,7 +34,7 @@
          <property name="name" value="Mazasoft Music Player"/>
          <property name="volume" value="50"/>
      </bean>-->
-    <bean id="musicPlayer"
+    <bean id="musicPlayer" scope="prototype"
           class="com.mazasoft.springcourse.player.MusicPlayer">
         <property name="music">
             <list value-type="com.mazasoft.springcourse.player.music.Music">
