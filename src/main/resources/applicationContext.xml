@@ -7,6 +7,7 @@
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd">
 
+    <context:property-placeholder location="classpath:musicPlayer.properties"/>
     <bean id="testBean"
           class="com.mazasoft.springcourse.TestBean">
         <constructor-arg value="Viktor"/>
@@ -14,13 +15,36 @@
     <bean id="classicalMusicBean"
           class="com.mazasoft.springcourse.player.music.impl.ClassicalMusic">
     </bean>
+    <bean id="popMusicBean"
+          class="com.mazasoft.springcourse.player.music.impl.PopMusic">
+    </bean>
 
     <bean id="rockMusicBean"
           class="com.mazasoft.springcourse.player.music.impl.RockMusic">
     </bean>
 
+    <!-- <bean id="musicPlayer"
+           class="com.mazasoft.springcourse.player.MusicPlayer">
+         <constructor-arg ref="rockMusicBean"/>
+     </bean>-->
+
+    <!-- <bean id="musicPlayer"
+           class="com.mazasoft.springcourse.player.MusicPlayer">
+         <property name="music" ref="rockMusicBean"/>
+         <property name="name" value="Mazasoft Music Player"/>
+         <property name="volume" value="50"/>
+     </bean>-->
     <bean id="musicPlayer"
           class="com.mazasoft.springcourse.player.MusicPlayer">
-        <constructor-arg ref="rockMusicBean"/>
+        <property name="music">
+            <list value-type="com.mazasoft.springcourse.player.music.Music">
+                <ref bean="popMusicBean"/>
+                <ref bean="rockMusicBean"/>
+                <ref bean="classicalMusicBean"/>
+            </list>
+        </property>
+        <property name="name" value="${musicPlayer.name}"/>
+        <property name="volume" value="${musicPlayer.volume}"/>
     </bean>
+
 </beans>
