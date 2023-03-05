@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Random;
 
 @Component
@@ -19,23 +20,23 @@ public class MusicPlayer {
     @Qualifier("rockMusic")
     private Music music2;
 
+    @Autowired
+    private Random random;
+
     @Value("${musicPlayer.name}")
     private String name;
     @Value("${musicPlayer.volume}")
     private int volume;
 
-    public MusicPlayer() {
+    List<Music> musicList;
+
+    @Autowired
+    public MusicPlayer(List<Music> musicList) {
+        this.musicList = musicList;
     }
 
-    public String playMusic(Style style) {
-        Random random = new Random();
-        int randomNumber = random.nextInt(3);
-
-        switch (style){
-            case ROCK: return music2.getSongs().get(randomNumber);
-            case CLASSICAL: return music1.getSongs().get(randomNumber);
-        }
-        return null;
+    public String playMusic() {
+        return musicList.get(random.nextInt(musicList.size())).getSong();
     }
 
     public String getName() {

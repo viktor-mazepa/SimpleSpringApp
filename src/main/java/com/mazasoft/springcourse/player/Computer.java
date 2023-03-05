@@ -20,7 +20,7 @@ public class Computer {
         return "Computer{" +
                 "id = " + id +
                 ", player name = " + musicPlayer.getName() +
-                ", music = " + musicPlayer.playMusic(Style.ROCK) +
+                ", music = " + musicPlayer.playMusic() +
                 ", volume = " + musicPlayer.getVolume() +
                 '}';
     }

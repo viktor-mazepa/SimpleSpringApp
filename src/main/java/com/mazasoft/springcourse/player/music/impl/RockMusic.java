@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-@Scope("prototype")
+@Scope("singleton")
 public class RockMusic implements Music {
     public List<String> getSongs() {
         return new ArrayList<String>() {{
