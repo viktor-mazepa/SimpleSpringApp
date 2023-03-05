@@ -1,5 +1,6 @@
 package com.mazasoft.springcourse;
 
+import com.mazasoft.springcourse.player.Computer;
 import com.mazasoft.springcourse.player.MusicPlayer;
 import com.mazasoft.springcourse.player.music.Music;
 import com.mazasoft.springcourse.player.music.impl.ClassicalMusic;
@@ -14,29 +15,18 @@ public class TestSpring {
 
     public static void main(String[] args) {
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(APPLICATION_CONTEXT_FILE_NAME);
-        /*   Music music = context.getBean(CLASSICAL_MUSIC_BEAN_NAME, Music.class);
+       /* Music music = context.getBean("rockMusic", Music.class);
         MusicPlayer musicPlayer = new MusicPlayer(music);
         musicPlayer.playMusic();
 
-        music = context.getBean(ROCK_MUSIC_BEAN_NAME, Music.class);
-        musicPlayer = new MusicPlayer(music);
+        Music music2 = context.getBean("classicalMusic", Music.class);
+        MusicPlayer classicalMusicPlayer = new MusicPlayer(music2);
+        classicalMusicPlayer.playMusic();*/
+/*
+        MusicPlayer musicPlayer = context.getBean("musicPlayer", MusicPlayer.class);
         musicPlayer.playMusic();*/
-
-        MusicPlayer firstMusicPlayer = context.getBean(MUSIC_PLAYER_BEAN_NAME, MusicPlayer.class);
-        //MusicPlayer secondMusicPlayer = context.getBean(MUSIC_PLAYER_BEAN_NAME, MusicPlayer.class);
-        firstMusicPlayer.setVolume(10);
-        firstMusicPlayer.playMusic();
-
-        System.out.println("Name = " + firstMusicPlayer.getName());
-        System.out.println("Volume = " + firstMusicPlayer.getVolume());
-
-        /*System.out.println("Name = " + secondMusicPlayer.getName());
-        System.out.println("Volume = " + secondMusicPlayer.getVolume());
-
-        boolean isTheSame = firstMusicPlayer == secondMusicPlayer;
-
-        System.out.println("isTheSame = " + isTheSame);*/
-
+        Computer computer = context.getBean("computer", Computer.class);
+        System.out.println(computer.toString());
         context.close();
     }
 }

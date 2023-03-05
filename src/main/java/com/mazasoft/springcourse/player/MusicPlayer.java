@@ -1,46 +1,41 @@
 package com.mazasoft.springcourse.player;
 
 import com.mazasoft.springcourse.player.music.Music;
+import com.mazasoft.springcourse.player.music.Style;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.function.Consumer;
+import java.util.Random;
 
+@Component
 public class MusicPlayer {
-    private List<Music> music  = new ArrayList<Music>();
+    @Autowired
+    @Qualifier("classicalMusic")
+    private Music music1;
 
+    @Autowired
+    @Qualifier("rockMusic")
+    private Music music2;
+
+    @Value("${musicPlayer.name}")
     private String name;
-
+    @Value("${musicPlayer.volume}")
     private int volume;
-
-    //IoC
-    public MusicPlayer(List<Music> music) {
-        this.music = music;
-    }
 
     public MusicPlayer() {
     }
 
-    public void playMusic() {
-        music.forEach(new Consumer<Music>() {
-            public void accept(Music music) {
-                System.out.println("Playing: " + music.getSong());
-            }
-        });
+    public String playMusic(Style style) {
+        Random random = new Random();
+        int randomNumber = random.nextInt(3);
 
-    }
-
-    // DI via setter
-    public void setMusic(List<Music> music) {
-        this.music = music;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setVolume(int volume) {
-        this.volume = volume;
+        switch (style){
+            case ROCK: return music2.getSongs().get(randomNumber);
+            case CLASSICAL: return music1.getSongs().get(randomNumber);
+        }
+        return null;
     }
 
     public String getName() {
