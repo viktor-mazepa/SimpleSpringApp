@@ -12,8 +12,11 @@
           class="com.mazasoft.springcourse.TestBean">
         <constructor-arg value="Viktor"/>
     </bean>
-    <bean id="classicalMusicBean"
-          class="com.mazasoft.springcourse.player.music.impl.ClassicalMusic">
+    <bean id="classicalMusicBean" scope="singleton"
+          class="com.mazasoft.springcourse.player.music.impl.ClassicalMusic"
+          factory-method="getClassicalMusic"
+          init-method="doMyInit"
+          destroy-method="doMyDestroy">
     </bean>
     <bean id="popMusicBean"
           class="com.mazasoft.springcourse.player.music.impl.PopMusic">
