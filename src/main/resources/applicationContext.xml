@@ -18,4 +18,9 @@
     <bean id="rockMusicBean"
           class="com.mazasoft.springcourse.player.music.impl.RockMusic">
     </bean>
+
+    <bean id="musicPlayer"
+          class="com.mazasoft.springcourse.player.MusicPlayer">
+        <constructor-arg ref="rockMusicBean"/>
+    </bean>
 </beans>
